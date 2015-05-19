@@ -1,0 +1,97 @@
+<!doctype html>
+<html ng-app="Eggly">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Anca's</title>
+
+        <link rel="stylesheet" href="assets/css/normalize.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="assets/css/eggly.css">
+        <link rel="stylesheet" href="assets/css/animations">
+    </head>
+    <body ng-controller = "MainCtrl">
+        <div class="container-fluid">
+            <div class="row">
+                <div style="background-color:#FF5050" class="col-sm-3 col-md-2 sidebar">
+                    <a href="#"><img class="logo" src="assets/img/logo.png"></a>
+                    <ul class="nav nav-sidebar">
+					 <li ng-repeat="category in categories" ng-class = "{'active':isCurrentCategory(category)}">
+						<a href="#" ng-click="setCurrentCategory(category)">{{category.name}}<a/>
+					 </li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-6 main">
+					<div  ng-repeat="bookmark in bookmarks | filter:{category:currentCategory.name}" ng-class = "{'active':isSelectedBookmark(bookmark.id)}">
+                        <button type="button" ng-click = "removeBookmark(bookmark)" class=close">&times;</button>
+                        <button type="button" ng-click="setEditedBookmark(bookmark);startEditing();" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <a href="{{bookmark.url}}" target="_blank">{{bookmark.title}}</a>
+                    </div>
+                    <hr/>		
+					<!--CREATING-->
+					<div ng-if="shouldShowAddingExpense()">
+						<button type="button" class = "btn btn-link" ng-click="startCreating()">
+							<span class="glyphicon glyphicon-plus"></span>
+							Adauga o cheltuiala pe ziua de azi!
+						</button>
+						<form novalidate class="create-form" ng-show="isCreating" role="form" ng-submit="addExpense()" >
+							<div class="form-group">
+								<label for="dateID">Selecteaza data</label>
+								<input type="date" class="form-control"  id="dateID" name="date" ng-model="formDate.expenseDate" placeholder="yyyy-MM-dd" min="2015-01-01"required />
+							</div>
+							<div class="form-group">
+								<label for="newExpenseTitle">Descriere cheltuiala(max 255 caractere)</label>
+								<input type="text" class="form-control" id="newExpenseTitle" ng-model = "expenses[0].title" placeholder="Scurta descriere/nume generic"/>
+							</div>
+							<div class="form-group">
+								<label for="newExpense.sum">Suma cheltuita</label>
+								<input type="text" class="form-control" id="newExpenseSum" ng-model="expenses[0].sum" placeholder="Suma cheltuita"/>
+							</div>
+							<button class="btn btn-info btn-sm" ng-show="registrationCompl(expenses[0]) && extraRows == 0" ng-click="showOneMoreEntry()">Adauga inca una!</button>
+							<div  ng-repeat="value in getNumber(extraRows) track by $index" >
+								<div class="form-group">
+									<label for="newExpenseTitle">Descriere cheltuiala(max 255 caractere)</label>
+									<input type="text" class="form-control" id="newExpenseTitle" ng-model = "expenses[$index + 1].title" placeholder="Scurta descriere/nume generic"/>
+								</div>
+								<div class="form-group">
+										<label for="newExpense.sum">Suma cheltuita</label>
+									<input type="text" class="form-control" id="newExpenseSum" ng-model="expenses[$index + 1].sum" placeholder="Scurta descriere/nume generi"/>							
+								</div>
+								<button class="btn btn-info btn-sm" ng-show="registrationCompl(expenses[$index + 1]) && $index + 1 == extraRows" ng-click="showOneMoreEntry()">Adauga inca una!</button>
+							</div>
+							<button type="submit" class="btn btn-info btn-lg" ng-click="saveExpense(formDate, expenses)">Adauga cheltuiala pe ziua de azi!</button>
+							<button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel creating!</button>
+						</form>
+					</div>	
+					<!---EDITING-->
+					<hr/>
+					<div ng-show="shouldShowEditing()">
+						<h1>Editing{{editedBookmark.title}}</h1>
+						<form novalidate class="edit-form" role="form" ng-submit="updateBookmark(editedBookmark)" >
+							<div class="form-group">
+								<label for="editedBookmarkTitle">Bookmark title</label>
+								<input type="text" class="form-control" id="editedBookmarkTitle" ng-model = "editedBookmark.title" placeholder="Enter title"/>
+							</div>
+							<div class="form-group">
+								<label for="editedBookmarkURL">Bookmark URL</label>
+								<input type="text" class="form-control" id="editedBookmarkURL" ng-model="editedBookmark.url" placeholder="Enter URL"/>							
+							</div>
+							<button type="submit" class="btn btn-info btn-lg">Edit</button>
+							<button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing()">Cancel editing!</button>
+						</form>
+					</div>
+				</div>
+            </div>
+        </div>
+        
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<script src="app/eggly-app.start.js"></script>
+		<script src="app/ngStorage.min.js"></script>
+		
+	</body>
+</html>
