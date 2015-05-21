@@ -22,13 +22,13 @@
 					 </li>
                     </ul>
                 </div>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-6 main">
+                <div class="col-sm-3 col-sm-offset-3 col-md-6 col-md-offset-3 main">
 					<div  ng-repeat="bookmark in bookmarks | filter:{category:currentCategory.name}" ng-class = "{'active':isSelectedBookmark(bookmark.id)}">
                         <button type="button" ng-click = "removeBookmark(bookmark)" class=close">&times;</button>
                         <button type="button" ng-click="setEditedBookmark(bookmark);startEditing();" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
                         <a href="{{bookmark.url}}" target="_blank">{{bookmark.title}}</a>
                     </div>
-                    <hr/>		
+                    <hr/>	
 					<!--CREATING-->
 					<div ng-if="shouldShowAddingExpense()">
 						<button type="button" class = "btn btn-link" ng-click="startCreating()">
@@ -63,7 +63,17 @@
 							<button type="submit" class="btn btn-info btn-lg" ng-click="saveExpense(formDate, expenses)">Adauga cheltuiala pe ziua de azi!</button>
 							<button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel creating!</button>
 						</form>
-					</div>	
+					</div>
+					<!--LISTING-->
+					<div>
+						<ul>
+							<li ng-repeat="expense in allExpenses" ng-show="!isCreating && !isEditing">
+								<a href="#">{{expense.date}}</a>
+								<button type="button" ng-click = "removeExpense(expense)" class=close">&times;</button>
+								<button type="button" ng-click="setEditedExpense(expense);startEditing();" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
+							</li>
+						</ul>	
+					</div>
 					<!---EDITING-->
 					<hr/>
 					<div ng-show="shouldShowEditing()">

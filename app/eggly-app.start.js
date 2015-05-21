@@ -30,6 +30,8 @@ angular.module('Eggly', ['ngStorage'
 		subExpenses: $scope.expenses
 	};
 	$scope.currentCategory = null;
+	$scope.allExpenses = [];
+	
 	function setCurrentCategory(category){
 		$scope.currentCategory = category;
 		cancelCreating();
@@ -147,11 +149,24 @@ angular.module('Eggly', ['ngStorage'
 		return new Array(num);   
 	}
 	
+	if($localStorage.allExpenses == undefined){
+		$localStorage.allExpenses = [];
+	}else{
+		$scope.allExpenses = $localStorage.allExpenses;
+	}
+	
 	$scope.saveExpense = function(formDate, expenses){
-		console.log(formDate.expenseDate);
-		$scope.expense.date = formDate.expenseDate;
+		$scope.expense.date = formDate.expenseDate.toLocaleDateString();
 		$scope.expense.subExpenses = expenses;
 		$localStorage.allExpenses.push($scope.expense);
 		console.log($localStorage.allExpenses);
+	}
+	
+	$scope.removeExpense = function(expense){
+		var length = $localStorage.allExpenses.length;
+		for(var i = 0; i < length; i++){
+			if(expense.date == $localStorage.allExpenses[i].date)
+				$localStorage.allExpenses.splice(i, 1);
+		}
 	}
 });
