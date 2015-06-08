@@ -1,2 +1,2 @@
 -ai grija la corectitudinea dom-ului. pt ca uitasem sa deschid un <div> nu-mi mergea ng-submitu' /:)
--_.findIndex(vector, functie), ci nu findIndex(vector, functie)
+-_.findIndex(vector, functie), ci nu findIndex(vector, functie)aaa
