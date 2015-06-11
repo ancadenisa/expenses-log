@@ -94,6 +94,9 @@ angular.module('Eggly', ['ngStorage'
 	
 
 	
+	
+	
+	
 	$scope.editedBookmark = null;
 	function setEditedBookmark(bookmark){
 		$scope.editedBookmark = angular.copy(bookmark);
@@ -122,7 +125,6 @@ angular.module('Eggly', ['ngStorage'
 	}
 	$scope.removeBookmark = removeBookmark;
 	 
-	//--------------------------------------------------------
 	//MULTIPLE INPUT LINES 
 	function registrationCompl(expense){
 		if(expense.title != " " && expense.sum != " "){				
