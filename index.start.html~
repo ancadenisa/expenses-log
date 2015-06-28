@@ -27,7 +27,7 @@
 					
                     <hr/>	
 					<!--CREATING-->
-					<div class="container col-sm-12 col-sm-offset-3 col-md-12 col-md-offset-3" ng-if="shouldShowAddingExpense()">
+					<div class="container col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3" ng-if="shouldShowAddingExpense()">
 						<button type="button" ng-show="!isCreating" class = "btn  btn-link btn-xs" ng-click="startCreating()">
 							<span class="glyphicon glyphicon-plus"></span>
 							Adauga o cheltuiala pe ziua de azi!
@@ -46,7 +46,7 @@
 								<input type="text" class="form-control" id="newExpenseSum" ng-model="expenses[0].sum" placeholder="Suma cheltuita"/>
 							</div>
 							<div class="form-group">
-							<button class="btn btn-info btn-sm" ng-show="registrationCompl(expenses[0]) && extraRows == 0" ng-click="showOneMoreEntry()">Adauga inca una!</button>
+							<button class="btn btn-warning btn-sm" ng-show="registrationCompl(expenses[0]) && extraRows == 0" ng-click="showOneMoreEntry()">Adauga inca una!</button>
 							</div>
 							<div  ng-repeat="value in getNumber(extraRows) track by $index" >
 								<div class="form-group">
@@ -66,14 +66,14 @@
 							</div>
 							<div class="form-group">
 							<button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel creating!</button>
-							</	div>
+							</div>
 						</form>
 					</div>
 					<!--LISTING-->
 					<div class = "container col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3" ng-show="!isCreating && !isEditing">
 						<ul>
 							<li ng-repeat="expense in allExpenses">
-								<a href="#">{{expense.date}}</a>
+								<a "href="#">{{expense.date}}</a>
 								<button type="button" ng-click = "removeExpense(expense)" class=close">&times;</button>
 								<button type="button" ng-click="setEditedExpense(expense);startEditing();" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
 							</li>
@@ -82,15 +82,17 @@
 					<!---EDITING-->
 					<hr/>
 					<div ng-show="shouldShowEditing()">
-						<h1>Editing{{editedBookmark.title}}</h1>
-						<form novalidate class="edit-form" role="form" ng-submit="updateBookmark(editedBookmark)" >
-							<div class="form-group">
-								<label for="editedBookmarkTitle">Bookmark title</label>
-								<input type="text" class="form-control" id="editedBookmarkTitle" ng-model = "editedBookmark.title" placeholder="Enter title"/>
-							</div>
-							<div class="form-group">
-								<label for="editedBookmarkURL">Bookmark URL</label>
-								<input type="text" class="form-control" id="editedBookmarkURL" ng-model="editedBookmark.url" placeholder="Enter URL"/>							
+						<h1>Editing {{editedExpense.date}}</h1>
+						<form novalidate class="edit-form" role="form" ng-submit="updateExpense(editedExpense)" >
+							<div  ng-repeat="value in getNumber(editedExpense.subExpenses.length) track by $index" >
+								<div class="form-group">
+									<label for="expenseTitle">Descriere cheltuiala(max 255 caractere)</label>
+									<input type="text" class="form-control" id="expenseTitle" ng-model = "editedExpense.subExpenses[$index].title" placeholder="Scurta descriere/nume generic"/>
+								</div>
+								<div class="form-group">
+										<label for="expenseSum">Suma cheltuita</label>
+									<input type="text" class="form-control" id="expenseSum" ng-model="editedExpense.subExpenses[$index].sum" placeholder="Scurta descriere/nume generic"/>							
+								</div>
 							</div>
 							<button type="submit" class="btn btn-info btn-lg">Edit</button>
 							<button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing()">Cancel editing!</button>

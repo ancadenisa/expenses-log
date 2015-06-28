@@ -7,7 +7,7 @@ Features:
 4. user can see a list of his/her expenses - DONE
 5. user can require a sum of expenses for a period
 6. user cannot add an expense on same day -- TO DO
-7. user cannot add anything else then numbers in exepense sum fields NEXT TODO
+7. user cannot add anything else then numbers in exepense sum fields
 
 BUG FIXING:
 1. When adding a new expense there are shown the fields from previous exepense - DONE

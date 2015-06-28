@@ -95,36 +95,13 @@ angular.module('Eggly', ['ngStorage'
 
 	
 	
-	
-	
-	$scope.editedBookmark = null;
-	function setEditedBookmark(bookmark){
-		$scope.editedBookmark = angular.copy(bookmark);
-	}
-	$scope.setEditedBookmark = setEditedBookmark;
-	
-	function updateBookmark(bookmark){
-		var index = _.findIndex($scope.bookmarks, function(b){
-			return b.id == bookmark.id;
-		})
-		$scope.bookmarks[index] = bookmark;
-		$scope.editedBookmark = null;
-		$scope.isEditing = false;
-	}
-	$scope.updateBookmark = updateBookmark;
-	
 	function isSelectedBookmark(bookmarkId){
 		return $scope.editedBookmark != null && bookmarkId === $scope.editedBookmark.id;
 	}
 	$scope.isSelectedBookmark = isSelectedBookmark;
 	
-	function removeBookmark(bookmark) {
-		_.remove($scope.bookmarks, function(b){
-			return b.id == bookmark.id
-		});
-	}
-	$scope.removeBookmark = removeBookmark;
 	 
+	//--------------------------------------------------------
 	//MULTIPLE INPUT LINES 
 	function registrationCompl(expense){
 		if(expense.title != " " && expense.sum != " "){				
@@ -149,19 +126,44 @@ angular.module('Eggly', ['ngStorage'
 	}else{
 		$scope.allExpenses = $localStorage.allExpenses;
 	}
-	
+	//SAVE expense
 	$scope.saveExpense = function(formDate, expenses){
 		$scope.expense.date = formDate.expenseDate.toLocaleDateString();
 		$scope.expense.subExpenses = expenses;
-		$localStorage.allExpenses.push($scope.expense);
+		$localStorage.allExpenses.push($scope.expense);		
 		console.log($localStorage.allExpenses);
+		$scope.isCreating = false;
+		//reset default creating values
+		$scope.expenses = [];
+		$scope.formDate.expenseDate = new Date();
 	}
-	
+	//REMOVE expense
 	$scope.removeExpense = function(expense){
-		var length = $localStorage.allExpenses.length;
+		//prima varianta de remove
+		/*var length = $localStorage.allExpenses.length;
 		for(var i = 0; i < length; i++){
 			if(expense.date == $localStorage.allExpenses[i].date)
 				$localStorage.allExpenses.splice(i, 1);
-		}
+		}*/
+		_.remove($localStorage.allExpenses, function(e){
+			return e.date == expense.date;
+		});
 	}
+	
+	//EDIT expense
+	$scope.editedExpense = null;
+	$scope.setEditedExpense = function setEditedExpense(expense){
+		$scope.editedExpense = angular.copy(expense);
+	}	
+	
+	$scope.updateExpense = function updateExpense(expense){
+		var index = _.findIndex($localStorage.allExpenses, function(e){
+			return e.date == expense.date;
+		})
+		$localStorage.allExpenses[index] = expense;
+		$scope.editedExpense = null;
+		$scope.isEditing = false;
+	}
+	
+	
 });

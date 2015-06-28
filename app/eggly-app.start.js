@@ -130,8 +130,13 @@ angular.module('Eggly', ['ngStorage'
 	$scope.saveExpense = function(formDate, expenses){
 		$scope.expense.date = formDate.expenseDate.toLocaleDateString();
 		$scope.expense.subExpenses = expenses;
-		$localStorage.allExpenses.push($scope.expense);
+		$localStorage.allExpenses.push($scope.expense);		
 		console.log($localStorage.allExpenses);
+		$scope.isCreating = false;
+		//reset default creating values
+		$scope.expenses = [];
+		$scope.formDate.expenseDate = new Date();
+		$scope.extraRows = 0;
 	}
 	//REMOVE expense
 	$scope.removeExpense = function(expense){
