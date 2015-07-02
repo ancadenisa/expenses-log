@@ -23,7 +23,7 @@ angular.module('Eggly', ['ngStorage'
     {"id":8, "title": "Dump", "url": "http://dump.com", "category": "Humor" }
 	]
 	$scope.expenses = [
-		{"title": " ", "sum": " "}
+		{"title": "", "sum": ""}
 	]
 	$scope.expense = {
 		date: $scope.formDate,
@@ -54,6 +54,10 @@ angular.module('Eggly', ['ngStorage'
 	}
 	function cancelCreating(){
 		$scope.isCreating = false;
+		//reset default creating values
+		$scope.expenses = [];
+		$scope.formDate.expenseDate = new Date();
+		$scope.extraRows = 0;
 	}
 	
 	function startEditing(){
@@ -104,16 +108,17 @@ angular.module('Eggly', ['ngStorage'
 	//--------------------------------------------------------
 	//MULTIPLE INPUT LINES 
 	function registrationCompl(expense){
-		if(expense.title != " " && expense.sum != " "){				
-				return true;
+		
+		if(expense.sum == undefined || expense.title == "" || expense.sum == ""){				
+				return false;
 		}
-		return false;		
+		return true;		
 	}
 	$scope.registrationCompl  = registrationCompl;
 	$scope.extraRows = 0;
 	function showOneMoreEntry(){
 		$scope.extraRows = $scope.extraRows + 1;
-		$scope.expenses[$scope.extraRows] = {"title": " ", "sum": " "};
+		$scope.expenses[$scope.extraRows] = {"title": "", "sum": ""};
 	}
 	$scope.showOneMoreEntry = showOneMoreEntry;
 	
@@ -132,11 +137,7 @@ angular.module('Eggly', ['ngStorage'
 		$scope.expense.subExpenses = expenses;
 		$localStorage.allExpenses.push($scope.expense);		
 		console.log($localStorage.allExpenses);
-		$scope.isCreating = false;
-		//reset default creating values
-		$scope.expenses = [];
-		$scope.formDate.expenseDate = new Date();
-		$scope.extraRows = 0;
+		cancelCreating();
 	}
 	//REMOVE expense
 	$scope.removeExpense = function(expense){
