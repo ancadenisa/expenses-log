@@ -96,12 +96,45 @@
 							<button type="submit" class="btn btn-info btn-lg">Edit</button>
 							<button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing()">Cancel editing!</button>
 						</form>
-					</div>
+					</div>					
+				<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#calculate">
 				</div>
             </div>
         </div>
         
-
+		
+		<!--DOING CALCULATION FOR A CERTAIN PERIOD OF TIME-->		
+		<div class = "modal fade" id = "calculate" role = "dialog">
+                    <div class = "modal-dialog">
+                        <div class = "modal-content">
+                            <form class = "form-horizontal">
+                                <div class = "modal-header">
+                                    <h4>Calculeaza suma</h4>
+                                </div>
+                                <div class = "modal-body">
+                               
+                                    <div class = "form-group">
+                                       
+                                        <label for = "start-date" class = "col-lg-2 control-label">Data de inceput:</label>
+                                        <div class = "col-lg-10">
+                                           <input type="date" class="form-control"  id="startdate" name="date" ng-model="startDate" placeholder="yyyy-MM-dd" min="2015-01-01"required />          
+                                        </div>
+                                    </div>
+                                    <div class = "form-group">
+                                        <label for = "end-date" class = "col-lg-2 control-label">Data de final</label>
+                                        <div class = "col-lg-10">
+											<input type="date" class="form-control"  id="enddate" name="date" ng-model="endDate" placeholder="yyyy-MM-dd" min="2015-01-01"required />
+                                        </div>
+                                    </div>            
+                                </div>
+                                <div class = "modal-footer">
+									<a class = "btn btn-default" data-dismiss = "modal">Close</a>    
+									<button class = "btn btn-primary" type = "submit">Calculeaza</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>

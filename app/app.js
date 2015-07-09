@@ -109,7 +109,7 @@ angular.module('Eggly', ['ngStorage'
 	//MULTIPLE INPUT LINES 
 	function registrationCompl(expense){
 		
-		if(expense.sum == undefined || expense.title == "" || expense.sum == ""){				
+		if(expense == undefined || expense.sum == undefined || expense.title == "" || expense.sum == ""){				
 				return false;
 		}
 		return true;		
