@@ -83,8 +83,8 @@ a:hover {
     background-color: #D5DBD8;
 }
 
-@media (min-width: 768px) {
-    .sidebar {
+
+.sidebar {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -96,7 +96,6 @@ a:hover {
         background-color: #2B2828;
         border-right: 1px solid #7B807E;
     }
-}
 
 .main {
     padding-top: 96px;

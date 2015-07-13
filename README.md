@@ -8,7 +8,7 @@ Features:
 5. user can require a sum of expenses for a period TODO
 6. user cannot add an expense on same day -- TO DO
 7. user cannot add anything else then numbers in exepense sum fields NEXT TODO
-8. user cannot add an expense wich has one or more empty fields
+8. user cannot add an expense wich has one or more empty fields DONE
 
 BUG FIXING:
 1. When adding a new expense there are shown the fields from previous exepense - DONE
@@ -18,7 +18,7 @@ CODE FIXING:
 1. reorganize code TODO 
 	-- make more functions TODO
 	-- establish possible transitions (editing->creating->listing etc) TODO
-2. clean project unnecesary files and personalize other files TODO
+2. clean project unnecesary files and personalize other files DONE
 
 DESIGN:
 TODO

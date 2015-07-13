@@ -167,5 +167,10 @@ angular.module('Eggly', ['ngStorage'
 		$scope.isEditing = false;
 	}
 	
+	$scope.testClick = function testClick(){
+		console.log("Test click");
+	}
 	
 });
+
+
