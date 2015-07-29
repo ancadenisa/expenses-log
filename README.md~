@@ -24,8 +24,7 @@ DESIGN:
 TODO
 		
 
-Many thanks to the great tool ngStorage[1] and to the people which told me about it at [2].
+Many thanks to the great tool ngStorage[1].
 
 
 [1]https://github.com/gsklee/ngStorage
-[2]http://stackoverflow.com/questions/28794287/write-json-to-local-disk-javascript
