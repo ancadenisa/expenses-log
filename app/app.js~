@@ -174,7 +174,7 @@ angular.module('explog', ['ngStorage'
 		var endDate = $scope.endDate.getDate();
 		var  index, itterDateCopy;
 		var expensesIndex;
-		var sum = 0;
+		var sum;
 		itterDate.setDate($scope.startDate.getDate());
 				
 		while(itterDate <= $scope.endDate){
