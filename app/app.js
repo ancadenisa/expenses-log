@@ -28,6 +28,7 @@ angular.module('explog', ['ngStorage'
 	
 	$scope.currentCategory = null;
 	$scope.allExpenses = [];
+	$scope.sumRequestedExpenses = 0;
 	
 	function setCurrentCategory(category){
 		$scope.currentCategory = category;
@@ -175,6 +176,7 @@ angular.module('explog', ['ngStorage'
 		var  index, itterDateCopy;
 		var expensesIndex;
 		var sum = 0;
+		$scope.sumRequestedExpenses = 0;
 		itterDate.setDate($scope.startDate.getDate());
 				
 		while(itterDate <= $scope.endDate){
@@ -184,12 +186,18 @@ angular.module('explog', ['ngStorage'
 			})
 							console.log(itterDate);
 			expensesIndex = $localStorage.allExpenses[index];
-			angular.forEach(expensesIndex.subExpenses, function(value, key) {
-				sum = sum + value.sum; 
-				});			
-				itterDate.setDate(itterDate.getDate() +  1);			
+			if(expensesIndex != undefined){
+				angular.forEach(expensesIndex.subExpenses, function(value, key) {
+					sum = sum + parseInt(value.sum); 
+					});											
+			}
+			itterDate.setDate(itterDate.getDate() +  1);
 		}
-		$scope.startDate = null; $scope.endDate =  null;						
+		$scope.startDate = null; $scope.endDate =  null;
+		$scope.sumRequestedExpenses = sum;
+		$('#calculate').modal('hide');
+		$('#result').modal('show');
+		
 	}
 	
 });
