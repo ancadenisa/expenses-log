@@ -87,6 +87,7 @@
 				<div class = "col-sm-7 col-sm-offset-2 col-md-7 col-md-offset-2"  ng-show="shouldShowEditing()">
 						<h1>Editing {{editedExpense.date}}</h1>
 						<form novalidate class="edit-form" role="form" ng-submit="updateExpense(editedExpense)" >
+							<input type="date" class="form-control"  id="dateID" name="date" ng-model="editedExpense.newDate" placeholder="yyyy-MM-dd" min="2015-01-01"/>
 							<div  ng-repeat="value in getNumber(editedExpense.subExpenses.length) track by $index" >
 								<div class="form-group">
 									<label for="expenseTitle">Descriere cheltuiala(max 255 caractere)</label>

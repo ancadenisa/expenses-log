@@ -165,19 +165,19 @@ angular.module('explog', ['ngStorage'
 		var index = _.findIndex($localStorage.allExpenses, function(e){
 			return e.date == expense.date;
 		})
+		expense.date = expense.newDate.toLocaleDateString();
 		$localStorage.allExpenses[index] = expense;
 		$scope.editedExpense = null;
 		$scope.isEditing = false;
 	}
 	
 	$scope.testClick = function testClick(){
-		var itterDate = new Date();
+		var itterDate = $scope.startDate;
 		var endDate = $scope.endDate.getDate();
 		var  index, itterDateCopy;
 		var expensesIndex;
 		var sum = 0;
 		$scope.sumRequestedExpenses = 0;
-		itterDate.setDate($scope.startDate.getDate());
 				
 		while(itterDate <= $scope.endDate){
 			itterDateCopy = itterDate.toLocaleDateString();		
@@ -203,3 +203,4 @@ angular.module('explog', ['ngStorage'
 });
 
 
+[{"date":"1/15/2016","subExpenses":[{"title":"HDD extern","sum":"300"},{"title":"Student pub","sum":"7"}]},{"date":"1/18/2016","subExpenses":[{"title":"rochie","sum":"30"}]},{"date":"1/17/2016","subExpenses":[{"title":"george","sum":"14"}]},{"date":"1/16/2016","subExpenses":[{"title":"movie","sum":"24"},{"title":"mc","sum":"3"},{"title":"biserica","sum":"7"}]},{"date":"1/19/2016","subExpenses":[{"title":"stud pub","sum":"7"},{"title":"apa + biscu","sum":"4..5"},{"title":"abonam sala","sum":"50"}]},{"date":"1/20/2016","subExpenses":[{"title":"sandwhich facultate","sum":"4"},{"title":"apa","sum":"3"},{"title":"dulciuri","sum":"2"}]},{"date":"1/23/2016","subExpenses":[{"title":"apa + biscuiti","sum":"5"},{"title":"chez gabi","sum":"11"}]},{"date":"1/24/2016","subExpenses":[{"title":"chez gabi","sum":"12"},{"title":"sandwhich","sum":"6"},{"title":"dulce","sum":"2"}]},{"date":"1/28/2016","subExpenses":[{"title":"ape + dulce + banana","sum":"10"},{"title":"cartela","sum":"5"},{"title":"abonament","sum":"35"},{"title":"mancare(mc+covrig)","sum":"5"}]},{"date":"1/29/2016","subExpenses":[{"title":"cadou cata","sum":"50"},{"title":"balerini","sum":"90"},{"title":"fes","sum":"25"}]},{"date":"2016-01-31T22:00:00.000Z","subExpenses":[{"title":"costum ski","sum":"140"}],"newDate":"2016-01-31T22:00:00.000Z"},{"date":"2016-02-04T22:00:00.000Z","subExpenses":[{"title":"Prajturi","sum":"10"},{"title":"apa","sum":"3"}],"newDate":"2016-02-04T22:00:00.000Z"},{"date":"2016-02-05T22:00:00.000Z","subExpenses":[{"title":"taxi hospice","sum":"18"}],"newDate":"2016-02-05T22:00:00.000Z"},{"date":"7/2/2016","subExpenses":[{"title":"chez gabi","sum":"12"},{"title":"rest chinezesc","sum":"145"},{"title":"apa","sum":"3"}]}]
